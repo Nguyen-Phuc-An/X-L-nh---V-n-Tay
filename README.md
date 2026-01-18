@@ -44,43 +44,45 @@ Xây dựng một hệ thống có khả năng:
 ```
 he_thong_nhan_dang_van_tay/
 │
-├── data/
-│   ├── anh_goc/              # Ảnh gốc đầu vào
-│   ├── anh_xam/              # Ảnh xám
-│   ├── anh_tang_cuong/       # Ảnh tăng cường
-│   ├── anh_nhi_phan/         # Ảnh nhị phân
-│   ├── anh_lam_manh/         # Ảnh làm mảnh
-│   └── dac_trung/            # Dữ liệu đặc trưng
+├── data/                              # Thư mục lưu ảnh đầu vào
+│   └── .gitkeep
 │
 ├── src/
 │   ├── giao_dien/
+│   │   ├── __init__.py
 │   │   ├── giao_dien_chinh.py         # Giao diện chính Tkinter
 │   │   ├── xu_ly_su_kien.py           # Xử lý sự kiện
 │   │   └── hien_thi_ket_qua.py        # Hiển thị kết quả
 │   │
 │   ├── tien_xu_ly/
+│   │   ├── __init__.py
 │   │   ├── chuyen_xam.py              # Chuyển sang grayscale
 │   │   ├── chuan_hoa.py               # Chuẩn hóa ảnh
 │   │   ├── loc_nhieu.py               # Lọc nhiễu
 │   │   └── tang_cuong.py              # Tăng cường ảnh (Gabor)
 │   │
 │   ├── phan_doan/
+│   │   ├── __init__.py
 │   │   └── nhi_phan_hoa.py            # Nhị phân hóa
 │   │
 │   ├── lam_manh/
+│   │   ├── __init__.py
 │   │   └── lam_manh_anh.py            # Làm mảnh ảnh (Scikit-image)
 │   │
 │   ├── trich_dac_trung/
+│   │   ├── __init__.py
 │   │   ├── trich_minhut.py            # Trích minutiae (CN + Neighbor)
 │   │   └── ve_dac_trung.py            # Vẽ đặc trưng
 │   │
 │   ├── so_khop/
+│   │   ├── __init__.py
 │   │   └── so_khop_van_tay.py         # So khớp vân tay
 │   │
 │   └── chuong_trinh_chinh.py          # Chương trình main
 │
 ├── ket_qua/                           # Thư mục lưu kết quả
-├── tai_lieu/                          # Tài liệu tham khảo
+│   └── .gitkeep
+│
 ├── thu_vien_can_thiet.txt             # Danh sách thư viện cần cài
 └── README.md                          # File này
 ```
