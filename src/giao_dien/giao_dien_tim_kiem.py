@@ -313,6 +313,19 @@ class GiaoDienTimKiem:
                         ),
                         tags=tag if tag else ()
                     )
+                    
+                    # Lưu matching history cho tất cả kết quả
+                    if self.anh_duong_dan:
+                        try:
+                            self.db_handler.cap_nhat_van_tay_match(
+                                fingerprint_id=result.get('fingerprint_id'),
+                                query_image_path=self.anh_duong_dan,
+                                matching_method=method,
+                                similarity_score=score,
+                                is_match=is_match
+                            )
+                        except Exception as e:
+                            print(f"Lỗi lưu matching history: {e}")
                 
                 # Cấu hình màu cho match
                 self.tree_result.tag_configure('match', background='lightgreen')

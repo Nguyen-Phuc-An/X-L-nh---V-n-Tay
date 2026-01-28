@@ -66,7 +66,7 @@ class GiaoDienChinh:
         
         # Tab 3: Tìm kiếm/Nhận dạng
         tab_tim_kiem = ttk.Frame(self.notebook_main)
-        self.notebook_main.add(tab_tim_kiem, text="🔍 Tìm Kiếm Người Dùng")
+        self.notebook_main.add(tab_tim_kiem, text="🔍 Tìm Kiếm")
         
         self.giao_dien_tim_kiem = GiaoDienTimKiem(tab_tim_kiem, self.db_handler)
         
@@ -125,31 +125,6 @@ class GiaoDienChinh:
         menu_db.add_command(label="📊 Xem Thống Kê", command=self._xem_thong_ke)
         menu_db.add_separator()
         menu_db.add_command(label="📜 Lịch Sử So Khớp", command=self._xem_lich_su)
-        
-        # Menu Xử lý
-        menu_xu_ly = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Xử lý", menu=menu_xu_ly)
-        menu_xu_ly.add_command(label="Tiền xử lý", command=self.xu_ly_su_kien.tien_xu_ly_anh)
-        menu_xu_ly.add_command(label="Nhị phân hóa", command=self.xu_ly_su_kien.nhi_phan_hoa_anh)
-        menu_xu_ly.add_command(label="Làm mảnh", command=self.xu_ly_su_kien.lam_manh_anh)
-        menu_xu_ly.add_command(label="Trích đặc trưng", command=self.xu_ly_su_kien.trich_dac_trung)
-        
-        # Menu So khớp
-        menu_so_khop = tk.Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="So khớp", menu=menu_so_khop)
-        menu_so_khop.add_command(label="Minutiae Matching", 
-                                command=self.xu_ly_su_kien.so_khop_anh)
-        menu_so_khop.add_command(label="Feature Matching", 
-                                command=self.xu_ly_su_kien.so_khop_feature)
-        menu_so_khop.add_command(label="LBP Texture", 
-                                command=self.xu_ly_su_kien.so_khop_lbp)
-        menu_so_khop.add_command(label="Ridge Orientation", 
-                                command=self.xu_ly_su_kien.so_khop_ridge)
-        menu_so_khop.add_command(label="Frequency Domain", 
-                                command=self.xu_ly_su_kien.so_khop_freq)
-        menu_so_khop.add_separator()
-        menu_so_khop.add_command(label="So khớp tất cả", 
-                                command=self.xu_ly_su_kien.so_khop_tat_ca)
         
         # Menu Trợ giúp
         menu_help = tk.Menu(menubar, tearoff=0)
@@ -265,7 +240,7 @@ class GiaoDienChinh:
                           "Hệ thống nhận dạng vân tay\n"
                           "Phiên bản 3.0\n\n"
                           "Tính năng:\n"
-                          "- 6 phương pháp so khớp\n"
+                          "- 5 phương pháp so khớp\n"
                           "- Database MySQL\n"
                           "- Nhận dạng người dùng\n\n"
                           "Công nghệ:\n"
