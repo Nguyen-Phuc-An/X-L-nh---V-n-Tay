@@ -50,7 +50,7 @@ class GiaoDienChinh:
         
         # Tab 1: So khớp 2 ảnh
         tab_so_khop = ttk.Frame(self.notebook_main)
-        self.notebook_main.add(tab_so_khop, text="📊 So Khớp 2 Ảnh")
+        self.notebook_main.add(tab_so_khop, text="So Khớp 2 Ảnh")
         
         self.hien_thi_ket_qua = HienThiKetQua(tab_so_khop)
         
@@ -60,13 +60,13 @@ class GiaoDienChinh:
         
         # Tab 2: Đăng ký người dùng
         tab_dang_ky = ttk.Frame(self.notebook_main)
-        self.notebook_main.add(tab_dang_ky, text="📝 Đăng Ký Người Dùng")
+        self.notebook_main.add(tab_dang_ky, text="Đăng Ký Người Dùng")
         
         self.giao_dien_dang_ky = GiaoDienDangKy(tab_dang_ky, self.db_handler)
         
         # Tab 3: Tìm kiếm/Nhận dạng
         tab_tim_kiem = ttk.Frame(self.notebook_main)
-        self.notebook_main.add(tab_tim_kiem, text="🔍 Tìm Kiếm")
+        self.notebook_main.add(tab_tim_kiem, text="Tìm Kiếm")
         
         self.giao_dien_tim_kiem = GiaoDienTimKiem(tab_tim_kiem, self.db_handler)
         
@@ -91,7 +91,7 @@ class GiaoDienChinh:
         header.pack_propagate(False)
         
         # Tiêu đề
-        title_label = tk.Label(header, text='🔐 HỆ THÔNG NHẬN DẠNG VÂN TAY', 
+        title_label = tk.Label(header, text='HỆ THÔNG NHẬN DẠNG VÂN TAY', 
                                font=('Arial', 16, 'bold'), fg='white', bg='#1a1a1a')
         title_label.pack(side=tk.LEFT, padx=20, pady=10)
         
@@ -121,10 +121,10 @@ class GiaoDienChinh:
         # Menu Database
         menu_db = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Database", menu=menu_db)
-        menu_db.add_command(label="🔗 Kết Nối Database", command=self._ket_noi_database)
-        menu_db.add_command(label="📊 Xem Thống Kê", command=self._xem_thong_ke)
+        menu_db.add_command(label="Kết Nối Database", command=self._ket_noi_database)
+        menu_db.add_command(label="Xem Thống Kê", command=self._xem_thong_ke)
         menu_db.add_separator()
-        menu_db.add_command(label="📜 Lịch Sử So Khớp", command=self._xem_lich_su)
+        menu_db.add_command(label="Lịch Sử So Khớp", command=self._xem_lich_su)
         
         # Menu Trợ giúp
         menu_help = tk.Menu(menubar, tearoff=0)
@@ -133,7 +133,7 @@ class GiaoDienChinh:
     
     def _tao_toolbar(self, parent):
         """Tạo toolbar"""
-        toolbar_frame = ttk.LabelFrame(parent, text="🛠️ CÔNG CỤ", padding=10)
+        toolbar_frame = ttk.LabelFrame(parent, text="CÔNG CỤ", padding=10)
         toolbar_frame.pack(fill=tk.X, padx=5, pady=5, side=tk.TOP)
         
         # Row 1: Database connection
@@ -141,9 +141,9 @@ class GiaoDienChinh:
         db_frame.pack(fill=tk.X, pady=5)
         
         ttk.Label(db_frame, text="Database:", font=('Arial', 9, 'bold')).pack(side=tk.LEFT, padx=5)
-        ttk.Button(db_frame, text="🔗 Kết Nối", width=15,
+        ttk.Button(db_frame, text="Kết Nối", width=15,
                   command=self._ket_noi_database).pack(side=tk.LEFT, padx=3)
-        ttk.Button(db_frame, text="📊 Thống Kê", width=15,
+        ttk.Button(db_frame, text="Thống Kê", width=15,
                   command=self._xem_thong_ke).pack(side=tk.LEFT, padx=3)
         
         ttk.Separator(db_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=15)
@@ -153,13 +153,13 @@ class GiaoDienChinh:
         proc_frame.pack(fill=tk.X, pady=5)
         
         ttk.Label(proc_frame, text="Xử lý:", font=('Arial', 9, 'bold')).pack(side=tk.LEFT, padx=5)
-        ttk.Button(proc_frame, text="🔧 Tiền xử lý", width=15,
+        ttk.Button(proc_frame, text="Tiền xử lý", width=15,
                   command=self.xu_ly_su_kien.tien_xu_ly_anh).pack(side=tk.LEFT, padx=3)
-        ttk.Button(proc_frame, text="⚫ Nhị phân hóa", width=15,
+        ttk.Button(proc_frame, text="Nhị phân hóa", width=15,
                   command=self.xu_ly_su_kien.nhi_phan_hoa_anh).pack(side=tk.LEFT, padx=3)
-        ttk.Button(proc_frame, text="✏️ Làm mảnh", width=15,
+        ttk.Button(proc_frame, text="Làm mảnh", width=15,
                   command=self.xu_ly_su_kien.lam_manh_anh).pack(side=tk.LEFT, padx=3)
-        ttk.Button(proc_frame, text="🔍 Trích đặc trưng", width=18,
+        ttk.Button(proc_frame, text="Trích đặc trưng", width=18,
                   command=self.xu_ly_su_kien.trich_dac_trung).pack(side=tk.LEFT, padx=3)
         
         ttk.Separator(proc_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=15)
@@ -179,21 +179,21 @@ class GiaoDienChinh:
         
         self.matching_method.trace('w', on_matching_method_change)
         
-        ttk.Button(proc_frame, text="⚖️ Thực hiện", width=12,
+        ttk.Button(proc_frame, text="Thực hiện", width=12,
                   command=self.xu_ly_su_kien.so_khop_anh).pack(side=tk.LEFT, padx=3)
         
-        ttk.Button(proc_frame, text="🔄 So khớp tất cả", width=15,
+        ttk.Button(proc_frame, text="So khớp tất cả", width=15,
                   command=self.xu_ly_su_kien.so_khop_tat_ca).pack(side=tk.LEFT, padx=3)
         
         ttk.Separator(proc_frame, orient=tk.VERTICAL).pack(side=tk.LEFT, fill=tk.Y, padx=15)
         
-        ttk.Button(proc_frame, text="🗑️ Xóa dữ liệu", width=13,
+        ttk.Button(proc_frame, text="Xóa dữ liệu", width=13,
                   command=self.xu_ly_su_kien.xoa_du_lieu).pack(side=tk.LEFT, padx=3)
     
     def _ket_noi_database(self):
         """Kết nối database"""
         if self.db_handler.ket_noi_database():
-            self.status_label.config(text="✓ Đã kết nối Database", fg='#99ff99')
+            self.status_label.config(text="Đã kết nối Database", fg='#99ff99')
     
     def _xem_thong_ke(self):
         """Xem thống kê database"""

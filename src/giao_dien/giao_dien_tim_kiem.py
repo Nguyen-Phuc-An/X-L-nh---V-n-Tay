@@ -58,7 +58,7 @@ class GiaoDienTimKiem:
         paned_window.add(options_frame, weight=1)
         
         # Label cho phần tùy chọn
-        ttk.Label(options_frame, text="⚙️ TÙY CHỌN TÌM KIẾM", 
+        ttk.Label(options_frame, text="TÙY CHỌN TÌM KIẾM", 
                  font=('Arial', 10, 'bold')).pack(pady=10)
         
         # Phương pháp so khớp
@@ -82,17 +82,17 @@ class GiaoDienTimKiem:
         button_frame = ttk.Frame(options_frame)
         button_frame.pack(fill=tk.X, padx=5, pady=5)
         
-        ttk.Button(button_frame, text="🔍 Tìm Kiếm",
+        ttk.Button(button_frame, text="Tìm Kiếm",
                   command=self._tim_kiem).pack(side=tk.LEFT, padx=3, fill=tk.X, expand=True)
         
-        ttk.Button(button_frame, text="🗑️ Xóa",
+        ttk.Button(button_frame, text="Xóa",
                   command=self._xoa_ket_qua).pack(side=tk.LEFT, padx=3, fill=tk.X, expand=True)
         
         # ===== CỘT GIỮA: Ảnh xem trước =====
         image_frame = ttk.Frame(paned_window)
         paned_window.add(image_frame, weight=1)
         
-        ttk.Label(image_frame, text="📸 HÌNH ẢNH TÌM KIẾM", 
+        ttk.Label(image_frame, text="HÌNH ẢNH TÌM KIẾM", 
                  font=('Arial', 10, 'bold')).pack(pady=10)
         
         # Canvas hiển thị ảnh
@@ -103,24 +103,24 @@ class GiaoDienTimKiem:
         action_frame = ttk.Frame(paned_window)
         paned_window.add(action_frame, weight=1)
         
-        ttk.Label(action_frame, text="📁 QUẢN LÝ ẢNH & KẾT QUẢ", 
+        ttk.Label(action_frame, text="QUẢN LÝ ẢNH & KẾT QUẢ", 
                  font=('Arial', 10, 'bold')).pack(pady=10)
         
         # Upload buttons
         button_top_frame = ttk.Frame(action_frame)
         button_top_frame.pack(fill=tk.X, padx=5, pady=5)
         
-        ttk.Button(button_top_frame, text="📁 Chọn Ảnh", 
+        ttk.Button(button_top_frame, text="Chọn Ảnh", 
                   command=self._chon_anh).pack(side=tk.LEFT, padx=3, fill=tk.X, expand=True)
         
-        ttk.Button(button_top_frame, text="🔄 Xóa Ảnh", 
+        ttk.Button(button_top_frame, text="Xóa Ảnh", 
                   command=self._xoa_anh).pack(side=tk.LEFT, padx=3, fill=tk.X, expand=True)
         
         # Separator
         ttk.Separator(action_frame, orient=tk.HORIZONTAL).pack(fill=tk.X, pady=10, padx=5)
         
         # Kết quả header
-        ttk.Label(action_frame, text="🎯 KẾT QUẢ", 
+        ttk.Label(action_frame, text="KẾT QUẢ", 
                  font=('Arial', 9, 'bold')).pack(anchor=tk.W, padx=5, pady=(10, 5))
         
         # Treeview kết quả
@@ -191,11 +191,11 @@ class GiaoDienTimKiem:
                                           image=anh_tk)
             self.canvas_image.image = anh_tk
             
-            self._cap_nhat_trang_thai(f"✓ Đã chọn ảnh: {os.path.basename(duong_dan)}")
+            self._cap_nhat_trang_thai(f"Đã chọn ảnh: {os.path.basename(duong_dan)}")
         
         except Exception as e:
             messagebox.showerror("Lỗi", f"Lỗi chọn ảnh: {str(e)}")
-            self._cap_nhat_trang_thai(f"✗ Lỗi: {str(e)}")
+            self._cap_nhat_trang_thai(f"Lỗi: {str(e)}")
     
     def _xoa_anh(self):
         """Xóa ảnh đã chọn"""
@@ -207,7 +207,7 @@ class GiaoDienTimKiem:
         self.minutiae = None
         
         self.canvas_image.delete("all")
-        self._cap_nhat_trang_thai("✓ Ảnh đã được xóa")
+        self._cap_nhat_trang_thai("Ảnh đã được xóa")
     
     def _xu_ly_anh(self):
         """Xử lý ảnh tự động"""
@@ -215,7 +215,7 @@ class GiaoDienTimKiem:
             return False
         
         try:
-            self._cap_nhat_trang_thai("⏳ Đang xử lý ảnh...")
+            self._cap_nhat_trang_thai("Đang xử lý ảnh...")
             
             method = self.var_method.get()
             
@@ -238,16 +238,16 @@ class GiaoDienTimKiem:
             if method in ['minutiae', 'comprehensive', 'feature']:
                 self.minutiae = trich_minutiae_chi_tiet(self.anh_manh)
                 minutiae_count = len(self.minutiae.get('endings', [])) + len(self.minutiae.get('bifurcations', []))
-                status_msg = f"✓ Xử lý hoàn tất!\n  - Minutiae tìm thấy: {minutiae_count}"
+                status_msg = f"Xử lý hoàn tất!\n  - Minutiae tìm thấy: {minutiae_count}"
             else:
                 self.minutiae = None
-                status_msg = "✓ Xử lý hoàn tát!"
+                status_msg = "Xử lý hoàn tát!"
             
             self._cap_nhat_trang_thai(status_msg)
             return True
         
         except Exception as e:
-            self._cap_nhat_trang_thai(f"✗ Lỗi xử lý: {str(e)}")
+            self._cap_nhat_trang_thai(f"Lỗi xử lý: {str(e)}")
             messagebox.showerror("Lỗi", f"Lỗi xử lý ảnh: {str(e)}")
             return False
     
@@ -278,7 +278,7 @@ class GiaoDienTimKiem:
                 'frequency': 'Frequency Domain'
             }.get(method, method)
             
-            self._cap_nhat_trang_thai(f"⏳ Đang tìm kiếm trong database ({method_display})...")
+            self._cap_nhat_trang_thai(f"Đang tìm kiếm trong database ({method_display})...")
             
             results = self.db_handler.nhan_dang_van_tay(
                 self.anh_manh, self.minutiae, method, anh_xu_ly=self.anh_xu_ly
@@ -332,15 +332,15 @@ class GiaoDienTimKiem:
                 self.tree_result.tag_configure('best_match', background='lightgreen', foreground='darkgreen')
                 
                 self._cap_nhat_trang_thai(
-                    f"✓ Tìm kiếm hoàn tất!\n"
+                    f"Tìm kiếm hoàn tất!\n"
                     f"  - Kết quả cao nhất: {best_score:.2f}%"
                 )
             else:
-                self._cap_nhat_trang_thai("✗ Không tìm thấy kết quả")
+                self._cap_nhat_trang_thai("Không tìm thấy kết quả")
         
         except Exception as e:
             messagebox.showerror("Lỗi", f"Lỗi tìm kiếm: {str(e)}")
-            self._cap_nhat_trang_thai(f"✗ Lỗi: {str(e)}")
+            self._cap_nhat_trang_thai(f"Lỗi: {str(e)}")
     
     def _xoa_ket_qua(self):
         """Xóa kết quả tìm kiếm"""

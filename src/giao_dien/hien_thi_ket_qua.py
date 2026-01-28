@@ -32,21 +32,21 @@ class HienThiKetQua:
         
         # Tab 1: Ảnh gốc
         tab_anh_goc = ttk.Frame(self.notebook)
-        self.notebook.add(tab_anh_goc, text="📷 Ảnh gốc")
+        self.notebook.add(tab_anh_goc, text="Ảnh gốc")
         self.canvas_anh_goc = tk.Canvas(tab_anh_goc, bg="#2b2b2b", highlightthickness=0)
         self.canvas_anh_goc.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         self.image_anh_goc = None
         
         # Tab 2: Ảnh sau xử lý
         tab_anh_sau = ttk.Frame(self.notebook)
-        self.notebook.add(tab_anh_sau, text="⚙️ Sau xử lý")
+        self.notebook.add(tab_anh_sau, text="Sau xử lý")
         self.canvas_anh_sau = tk.Canvas(tab_anh_sau, bg="#2b2b2b", highlightthickness=0)
         self.canvas_anh_sau.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         self.image_anh_sau = None
         
         # Tab 3: Minutiae
         tab_anh_minutiae = ttk.Frame(self.notebook)
-        self.tab_minutiae_index = self.notebook.add(tab_anh_minutiae, text="🔍 Minutiae")
+        self.tab_minutiae_index = self.notebook.add(tab_anh_minutiae, text="Trích đặc trưng")
         self.canvas_anh_minutiae = tk.Canvas(tab_anh_minutiae, bg="#2b2b2b", highlightthickness=0)
         self.canvas_anh_minutiae.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
         self.image_anh_minutiae = None
@@ -61,10 +61,10 @@ class HienThiKetQua:
         
         ttk.Label(button_frame, text="Tải ảnh:", font=('Arial', 9, 'bold')).pack(side=tk.LEFT, padx=5)
         # Note: Các button sẽ được set command từ xu_ly_su_kien sau
-        self.btn_anh_1 = ttk.Button(button_frame, text="📁 Ảnh 1", width=12)
+        self.btn_anh_1 = ttk.Button(button_frame, text="Ảnh 1", width=12)
         self.btn_anh_1.pack(side=tk.LEFT, padx=3)
         
-        self.btn_anh_2 = ttk.Button(button_frame, text="📁 Ảnh 2", width=12)
+        self.btn_anh_2 = ttk.Button(button_frame, text="Ảnh 2", width=12)
         self.btn_anh_2.pack(side=tk.LEFT, padx=3)
         
         # Tạo canvas scrollable
@@ -87,107 +87,180 @@ class HienThiKetQua:
         frame_anh = ttk.Frame(self.frame_info, style='Card.TFrame')
         frame_anh.pack(fill=tk.X, padx=8, pady=8)
         
-        lbl_anh = ttk.Label(frame_anh, text="📐 THÔNG TIN ẢNH", style='Title.TLabel')
+        lbl_anh = ttk.Label(frame_anh, text="THÔNG TIN ẢNH", style='Title.TLabel')
         lbl_anh.pack(anchor=tk.W, padx=10, pady=(8, 5))
         
         frame_anh_content = ttk.Frame(frame_anh, style='Card.TFrame')
         frame_anh_content.pack(fill=tk.X, padx=10, pady=(0, 8))
         
-        self.label_kich_thuoc = ttk.Label(frame_anh_content, text="📏 Kích thước: N/A", foreground='#27ae60')
+        self.label_kich_thuoc = ttk.Label(frame_anh_content, text="Kích thước: N/A", foreground='#27ae60')
         self.label_kich_thuoc.pack(anchor=tk.W, pady=3)
         
         # Thông tin chi tiết - Card style (nội dung sẽ thay đổi theo phương pháp)
         self.frame_details = ttk.Frame(self.frame_info, style='Card.TFrame')
         self.frame_details.pack(fill=tk.X, padx=8, pady=8)
         
-        self.lbl_details = ttk.Label(self.frame_details, text="🔎 MINUTIAE", style='Title.TLabel')
+        self.lbl_details = ttk.Label(self.frame_details, text="MINUTIAE", style='Title.TLabel')
         self.lbl_details.pack(anchor=tk.W, padx=10, pady=(8, 5))
         
         frame_details_content = ttk.Frame(self.frame_details, style='Card.TFrame')
         frame_details_content.pack(fill=tk.X, padx=10, pady=(0, 8))
         
-        # Minutiae labels
-        self.label_ending = ttk.Label(frame_details_content, text="↳ Ending: 0", foreground='#3498db')
-        self.label_ending.grid(row=0, column=0, sticky=tk.W, pady=2, padx=0)
+        # Minutiae labels - Image 1
+        self.label_minutiae_img1_title = ttk.Label(frame_details_content, text="Ảnh 1:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_minutiae_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_minutiae_img1_title.grid_remove()
         
-        self.label_bifurcation = ttk.Label(frame_details_content, text="↴ Bifurcation: 0", foreground='#e74c3c')
-        self.label_bifurcation.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_ending = ttk.Label(frame_details_content, text="  Kết thúc: 0", foreground='#3498db')
+        self.label_ending.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_ending.grid_remove()
         
-        self.label_total = ttk.Label(frame_details_content, text="✓ Tổng: 0", foreground='#f39c12')
-        self.label_total.grid(row=2, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_bifurcation = ttk.Label(frame_details_content, text="  Phân nhánh: 0", foreground='#3498db')
+        self.label_bifurcation.grid(row=2, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_bifurcation.grid_remove()
+        
+        self.label_total = ttk.Label(frame_details_content, text="  Tổng: 0", foreground='#3498db')
+        self.label_total.grid(row=3, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_total.grid_remove()
+        
+        # Minutiae labels - Image 2
+        self.label_minutiae_img2_title = ttk.Label(frame_details_content, text="Ảnh 2:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_minutiae_img2_title.grid(row=4, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_minutiae_img2_title.grid_remove()
+        
+        self.label_ending2 = ttk.Label(frame_details_content, text="  Kết thúc: 0", foreground='#e74c3c')
+        self.label_ending2.grid(row=5, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_ending2.grid_remove()
+        
+        self.label_bifurcation2 = ttk.Label(frame_details_content, text="  Phân nhánh: 0", foreground='#e74c3c')
+        self.label_bifurcation2.grid(row=6, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_bifurcation2.grid_remove()
+        
+        self.label_total2 = ttk.Label(frame_details_content, text="  Tổng: 0", foreground='#e74c3c')
+        self.label_total2.grid(row=7, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_total2.grid_remove()
         
         # Feature Matching labels
-        self.label_feature_count1 = ttk.Label(frame_details_content, text="🔍 Features ảnh 1: 0", foreground='#3498db')
-        self.label_feature_count1.grid(row=0, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_feature_img1_title = ttk.Label(frame_details_content, text="Ảnh 1:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_feature_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_feature_img1_title.grid_remove()
         
-        self.label_feature_count2 = ttk.Label(frame_details_content, text="🔍 Features ảnh 2: 0", foreground='#e74c3c')
-        self.label_feature_count2.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_feature_count1 = ttk.Label(frame_details_content, text="  Đặc trưng: 0", foreground='#3498db')
+        self.label_feature_count1.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_feature_count1.grid_remove()
         
-        self.label_good_matches = ttk.Label(frame_details_content, text="✓ Good matches: 0", foreground='#f39c12')
-        self.label_good_matches.grid(row=2, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_feature_img2_title = ttk.Label(frame_details_content, text="Ảnh 2:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_feature_img2_title.grid(row=2, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_feature_img2_title.grid_remove()
         
-        # Harris Corners labels
-        self.label_harris_corner1 = ttk.Label(frame_details_content, text="🔺 Corners ảnh 1: 0", foreground='#3498db')
-        self.label_harris_corner1.grid(row=0, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_feature_count2 = ttk.Label(frame_details_content, text="  Đặc trưng: 0", foreground='#e74c3c')
+        self.label_feature_count2.grid(row=3, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_feature_count2.grid_remove()
         
-        self.label_harris_corner2 = ttk.Label(frame_details_content, text="🔺 Corners ảnh 2: 0", foreground='#e74c3c')
-        self.label_harris_corner2.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
-        
-        # ORB labels
-        self.label_orb_kp1 = ttk.Label(frame_details_content, text="🌀 Keypoints ảnh 1: 0", foreground='#3498db')
-        self.label_orb_kp1.grid(row=0, column=0, sticky=tk.W, pady=2, padx=0)
-        
-        self.label_orb_kp2 = ttk.Label(frame_details_content, text="🌀 Keypoints ảnh 2: 0", foreground='#e74c3c')
-        self.label_orb_kp2.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
-        
-        self.label_orb_matched = ttk.Label(frame_details_content, text="✓ Matched: 0", foreground='#f39c12')
-        self.label_orb_matched.grid(row=2, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_good_matches = ttk.Label(frame_details_content, text="Khớp tốt: 0", foreground='#f39c12')
+        self.label_good_matches.grid(row=4, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_good_matches.grid_remove()
         
         # LBP labels
-        self.label_lbp_distance = ttk.Label(frame_details_content, text="📊 Chi-square distance: 0.0000", foreground='#3498db')
-        self.label_lbp_distance.grid(row=0, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_lbp_img1_title = ttk.Label(frame_details_content, text="Ảnh 1:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_lbp_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_lbp_img1_title.grid_remove()
+        
+        self.label_lbp_histogram1 = ttk.Label(frame_details_content, text="  Histogram: -", foreground='#3498db')
+        self.label_lbp_histogram1.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_lbp_histogram1.grid_remove()
+        
+        self.label_lbp_img2_title = ttk.Label(frame_details_content, text="Ảnh 2:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_lbp_img2_title.grid(row=2, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_lbp_img2_title.grid_remove()
+        
+        self.label_lbp_histogram2 = ttk.Label(frame_details_content, text="  Histogram: -", foreground='#e74c3c')
+        self.label_lbp_histogram2.grid(row=3, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_lbp_histogram2.grid_remove()
+        
+        self.label_lbp_distance = ttk.Label(frame_details_content, text="Khoảng cách Chi-square: 0.0000", foreground='#f39c12')
+        self.label_lbp_distance.grid(row=4, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_lbp_distance.grid_remove()
+        
+        self.label_lbp_similarity = ttk.Label(frame_details_content, text="Tương đồng: 0.00%", foreground='#f39c12')
+        self.label_lbp_similarity.grid(row=5, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_lbp_similarity.grid_remove()
         
         # Ridge Orientation labels
-        self.label_ridge_diff = ttk.Label(frame_details_content, text="〰️ Mean angle diff: 0.00°", foreground='#3498db')
-        self.label_ridge_diff.grid(row=0, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_ridge_img1_title = ttk.Label(frame_details_content, text="Ảnh 1:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_ridge_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_ridge_img1_title.grid_remove()
         
-        self.label_ridge_cons1 = ttk.Label(frame_details_content, text="〰️ Consistency 1: 0.0000", foreground='#e74c3c')
-        self.label_ridge_cons1.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_ridge_orientation1 = ttk.Label(frame_details_content, text="  Góc trung bình: -", foreground='#3498db')
+        self.label_ridge_orientation1.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_ridge_orientation1.grid_remove()
         
-        self.label_ridge_cons2 = ttk.Label(frame_details_content, text="〰️ Consistency 2: 0.0000", foreground='#f39c12')
-        self.label_ridge_cons2.grid(row=2, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_ridge_img2_title = ttk.Label(frame_details_content, text="Ảnh 2:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_ridge_img2_title.grid(row=2, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_ridge_img2_title.grid_remove()
+        
+        self.label_ridge_orientation2 = ttk.Label(frame_details_content, text="  Góc trung bình: -", foreground='#e74c3c')
+        self.label_ridge_orientation2.grid(row=3, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_ridge_orientation2.grid_remove()
+        
+        self.label_ridge_diff = ttk.Label(frame_details_content, text="Chênh lệch góc: 0.00°", foreground='#f39c12')
+        self.label_ridge_diff.grid(row=4, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_ridge_diff.grid_remove()
+        
+        self.label_ridge_consistency = ttk.Label(frame_details_content, text="Độ nhất quán: 0.0000", foreground='#f39c12')
+        self.label_ridge_consistency.grid(row=5, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_ridge_consistency.grid_remove()
         
         # Frequency Domain labels
-        self.label_freq_sim = ttk.Label(frame_details_content, text="📈 Freq similarity: 0.00", foreground='#3498db')
-        self.label_freq_sim.grid(row=0, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_freq_img1_title = ttk.Label(frame_details_content, text="Ảnh 1:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_freq_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_freq_img1_title.grid_remove()
         
-        self.label_energy_sim = ttk.Label(frame_details_content, text="📈 Energy similarity: 0.00", foreground='#e74c3c')
-        self.label_energy_sim.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_freq_fft1 = ttk.Label(frame_details_content, text="  FFT: -", foreground='#3498db')
+        self.label_freq_fft1.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_freq_fft1.grid_remove()
         
-        self.label_ridge_sim = ttk.Label(frame_details_content, text="📈 Ridge similarity: 0.00", foreground='#f39c12')
-        self.label_ridge_sim.grid(row=2, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_freq_img2_title = ttk.Label(frame_details_content, text="Ảnh 2:", foreground='#2c3e50', font=('Arial', 9, 'bold'))
+        self.label_freq_img2_title.grid(row=2, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+        self.label_freq_img2_title.grid_remove()
+        
+        self.label_freq_fft2 = ttk.Label(frame_details_content, text="  FFT: -", foreground='#e74c3c')
+        self.label_freq_fft2.grid(row=3, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_freq_fft2.grid_remove()
+        
+        self.label_freq_spectrum = ttk.Label(frame_details_content, text="Phổ tần: 0.00%", foreground='#f39c12')
+        self.label_freq_spectrum.grid(row=4, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_freq_spectrum.grid_remove()
+        
+        self.label_freq_energy = ttk.Label(frame_details_content, text="Năng lượng: 0.00%", foreground='#f39c12')
+        self.label_freq_energy.grid(row=5, column=0, sticky=tk.W, pady=2, padx=0)
+        self.label_freq_energy.grid_remove()
+        
+        self.label_freq_similarity = ttk.Label(frame_details_content, text="Tương đồng: 0.00%", foreground='#f39c12')
+        self.label_freq_similarity.grid(row=6, column=0, sticky=tk.W, pady=3, padx=0)
+        self.label_freq_similarity.grid_remove()
         
         # Thông tin so khớp - Card style
         frame_match = ttk.Frame(self.frame_info, style='Card.TFrame')
         frame_match.pack(fill=tk.X, padx=8, pady=8)
         
-        lbl_match = ttk.Label(frame_match, text="⚖️ KẾT QUẢ SO KHỚP", style='Title.TLabel')
+        lbl_match = ttk.Label(frame_match, text="KẾT QUẢ SO KHỚP", style='Title.TLabel')
         lbl_match.pack(anchor=tk.W, padx=10, pady=(8, 5))
         
         frame_match_content = ttk.Frame(frame_match, style='Card.TFrame')
         frame_match_content.pack(fill=tk.X, padx=10, pady=(0, 8))
         
-        self.label_match = ttk.Label(frame_match_content, text="🎯 Match: N/A", foreground='#9b59b6')
+        self.label_match = ttk.Label(frame_match_content, text="Khớp: N/A", foreground='#9b59b6')
         self.label_match.pack(anchor=tk.W, pady=2)
         
-        self.label_similarity = ttk.Label(frame_match_content, text="📊 Tương đồng: N/A", foreground='#1abc9c')
+        self.label_similarity = ttk.Label(frame_match_content, text="Tương đồng: N/A", foreground='#1abc9c')
         self.label_similarity.pack(anchor=tk.W, pady=3)
         
         # Thông báo thành công - Card style
         frame_notification = ttk.Frame(self.frame_info, style='Card.TFrame')
         frame_notification.pack(fill=tk.BOTH, expand=True, padx=8, pady=8)
         
-        lbl_thong_bao = ttk.Label(frame_notification, text="✅ THÔNG BÁO", style='Title.TLabel')
+        lbl_thong_bao = ttk.Label(frame_notification, text="THÔNG BÁO", style='Title.TLabel')
         lbl_thong_bao.pack(anchor=tk.W, padx=10, pady=(8, 5))
         
         # Text widget để hiển thị thông báo
@@ -279,102 +352,165 @@ class HienThiKetQua:
         canvas.create_image(x_center, y_center, image=image_tk)
         canvas.image = image_tk
     
-    def cap_nhat_chi_tiet_minutiae(self, ending_count, bifurcation_count, total_count):
-        """Cập nhật thông tin Minutiae Matching"""
-        self.label_ending.config(text=f"📍 Ending: {ending_count}")
-        self.label_bifurcation.config(text=f"🔀 Bifurcation: {bifurcation_count}")
-        self.label_total.config(text=f"📊 Total: {total_count}")
+    def cap_nhat_chi_tiet_minutiae(self, ending_count1, bifurcation_count1, total_count1, ending_count2=0, bifurcation_count2=0, total_count2=0):
+        """Cập nhật thông tin Minutiae cho cả 2 ảnh"""
+        # Image 1
+        self.label_ending.config(text=f"  Kết thúc: {ending_count1}")
+        self.label_bifurcation.config(text=f"  Phân nhánh: {bifurcation_count1}")
+        self.label_total.config(text=f"  Tổng: {total_count1}")
+        
+        # Image 2
+        if ending_count2 > 0 or bifurcation_count2 > 0 or total_count2 > 0:
+            self.label_ending2.config(text=f"  Kết thúc: {ending_count2}")
+            self.label_bifurcation2.config(text=f"  Phân nhánh: {bifurcation_count2}")
+            self.label_total2.config(text=f"  Tổng: {total_count2}")
     
     def cap_nhat_chi_tiet_feature(self, feature_count1, feature_count2, good_matches):
-        """Cập nhật thông tin Feature Matching"""
-        self.label_feature_count1.config(text=f"🔍 Features ảnh 1: {feature_count1}")
-        self.label_feature_count2.config(text=f"🔍 Features ảnh 2: {feature_count2}")
-        self.label_good_matches.config(text=f"✓ Good matches: {good_matches}")
+        """Cập nhật thông tin Feature Matching cho cả 2 ảnh"""
+        self.label_feature_count1.config(text=f"  Đặc trưng: {feature_count1}")
+        self.label_feature_count2.config(text=f"  Đặc trưng: {feature_count2}")
+        self.label_good_matches.config(text=f"Khớp tốt: {good_matches}")
     
-    def cap_nhat_chi_tiet_lbp(self, chi_square_distance):
+    def cap_nhat_chi_tiet_lbp(self, chi_square_distance, histogram1_size=None, histogram2_size=None):
         """Cập nhật thông tin LBP Texture"""
-        self.label_lbp_distance.config(text=f"📊 Chi-square distance: {chi_square_distance:.4f}")
+        if histogram1_size and histogram1_size > 0:
+            self.label_lbp_histogram1.config(text=f"  Histogram: {histogram1_size} bins")
+        if histogram2_size and histogram2_size > 0:
+            self.label_lbp_histogram2.config(text=f"  Histogram: {histogram2_size} bins")
+        self.label_lbp_distance.config(text=f"Khoảng cách Chi-square: {chi_square_distance:.4f}")
+        # Chi-square thấp = tương đồng cao
+        similarity = max(0, 100 - (chi_square_distance * 10))
+        self.label_lbp_similarity.config(text=f"Tương đồng: {similarity:.2f}%")
     
-    def cap_nhat_chi_tiet_ridge(self, mean_angle_diff, consistency1, consistency2):
+    def cap_nhat_chi_tiet_ridge(self, mean_angle_diff, avg_angle1=None, avg_angle2=None):
         """Cập nhật thông tin Ridge Orientation"""
-        self.label_ridge_diff.config(text=f"〰️ Mean angle diff: {mean_angle_diff:.2f}°")
-        self.label_ridge_cons1.config(text=f"〰️ Consistency 1: {consistency1:.4f}")
-        self.label_ridge_cons2.config(text=f"〰️ Consistency 2: {consistency2:.4f}")
+        if avg_angle1 is not None:
+            self.label_ridge_orientation1.config(text=f"  Góc trung bình: {avg_angle1:.2f}°")
+        if avg_angle2 is not None:
+            self.label_ridge_orientation2.config(text=f"  Góc trung bình: {avg_angle2:.2f}°")
+        self.label_ridge_diff.config(text=f"Chênh lệch góc: {mean_angle_diff:.2f}°")
+        # Tính độ nhất quán từ angle diff
+        consistency = max(0, 100 - (mean_angle_diff * 2))
+        self.label_ridge_consistency.config(text=f"Độ nhất quán: {consistency:.2f}%")
     
-    def cap_nhat_chi_tiet_frequency(self, freq_sim, energy_sim, ridge_sim):
+    def cap_nhat_chi_tiet_frequency(self, freq_sim, energy_sim, similarity_score=None, fft_info1=None, fft_info2=None):
         """Cập nhật thông tin Frequency Domain"""
-        self.label_freq_sim.config(text=f"📈 Freq similarity: {freq_sim:.2f}")
-        self.label_energy_sim.config(text=f"📈 Energy similarity: {energy_sim:.2f}")
-        self.label_ridge_sim.config(text=f"📈 Ridge similarity: {ridge_sim:.2f}")
+        if fft_info1:
+            self.label_freq_fft1.config(text=f"  📈 FFT: {fft_info1}")
+        if fft_info2:
+            self.label_freq_fft2.config(text=f"  FFT: {fft_info2}")
+        self.label_freq_spectrum.config(text=f"Phổ tần: {freq_sim:.2f}%")
+        self.label_freq_energy.config(text=f"Năng lượng: {energy_sim:.2f}%")
+        # Tính overall similarity từ freq + energy
+        overall = (freq_sim + energy_sim) / 2 if similarity_score is None else similarity_score
+        self.label_freq_similarity.config(text=f"Tương đồng: {overall:.2f}%")
     
     def cap_nhat_thong_tin(self, kich_thuoc, num_ending, num_bifurcation):
         """Cập nhật thông tin ảnh"""
         h, w = kich_thuoc[:2]
-        self.label_kich_thuoc.config(text=f"📏 Kích thước: {w}×{h} pixels")
+        self.label_kich_thuoc.config(text=f"Kích thước: {w}×{h} pixels")
         
-        self.label_ending.config(text=f"↳ Ending: {num_ending}")
-        self.label_bifurcation.config(text=f"↴ Bifurcation: {num_bifurcation}")
+        self.label_ending.config(text=f"Kết thúc: {num_ending}")
+        self.label_bifurcation.config(text=f"Phân nhánh: {num_bifurcation}")
         total = num_ending + num_bifurcation
-        self.label_total.config(text=f"✓ Tổng: {total}")
+        self.label_total.config(text=f"Tổng: {total}")
     
     def cap_nhat_ket_qua_so_khop(self, match_percentage, similarity_score):
         """Cập nhật kết quả so khớp"""
-        self.label_match.config(text=f"🎯 Match: {match_percentage:.1f}%")
-        self.label_similarity.config(text=f"📊 Tương đồng: {similarity_score:.1f}/100")
+        self.label_match.config(text=f"Khớp: {match_percentage:.1f}%")
+        self.label_similarity.config(text=f"Tương đồng: {similarity_score:.1f}/100")
     
     def cap_nhat_phuong_phap_so_khop(self, phương_pháp):
         """Cập nhật tiêu đề và ẩn/hiển thị labels theo phương pháp matching"""
         emoji_map = {
-            'minutiae': '🔎 MINUTIAE',
-            'feature': '🎯 FEATURE MATCHING',
-            'lbp': '📊 LBP TEXTURE',
-            'ridge': '〰️ RIDGE ORIENTATION',
-            'frequency': '📈 FREQUENCY DOMAIN'
+            'minutiae': 'MINUTIAE',
+            'feature': 'FEATURE MATCHING',
+            'lbp': 'LBP TEXTURE',
+            'ridge': 'RIDGE ORIENTATION',
+            'frequency': 'FREQUENCY DOMAIN'
         }
         
-        title = emoji_map.get(phương_pháp, '🔍 THÔNG TIN')
+        title = emoji_map.get(phương_pháp, 'THÔNG TIN')
         
         try:
             self.lbl_details.config(text=title)
             
             # Ẩn tất cả labels
+            self.label_minutiae_img1_title.grid_remove()
             self.label_ending.grid_remove()
             self.label_bifurcation.grid_remove()
             self.label_total.grid_remove()
+            self.label_minutiae_img2_title.grid_remove()
+            self.label_ending2.grid_remove()
+            self.label_bifurcation2.grid_remove()
+            self.label_total2.grid_remove()
+            self.label_feature_img1_title.grid_remove()
             self.label_feature_count1.grid_remove()
+            self.label_feature_img2_title.grid_remove()
             self.label_feature_count2.grid_remove()
             self.label_good_matches.grid_remove()
+            self.label_lbp_img1_title.grid_remove()
+            self.label_lbp_histogram1.grid_remove()
+            self.label_lbp_img2_title.grid_remove()
+            self.label_lbp_histogram2.grid_remove()
             self.label_lbp_distance.grid_remove()
+            self.label_lbp_similarity.grid_remove()
+            self.label_ridge_img1_title.grid_remove()
+            self.label_ridge_orientation1.grid_remove()
+            self.label_ridge_img2_title.grid_remove()
+            self.label_ridge_orientation2.grid_remove()
             self.label_ridge_diff.grid_remove()
-            self.label_ridge_cons1.grid_remove()
-            self.label_ridge_cons2.grid_remove()
-            self.label_freq_sim.grid_remove()
-            self.label_energy_sim.grid_remove()
-            self.label_ridge_sim.grid_remove()
+            self.label_ridge_consistency.grid_remove()
+            self.label_freq_img1_title.grid_remove()
+            self.label_freq_fft1.grid_remove()
+            self.label_freq_img2_title.grid_remove()
+            self.label_freq_fft2.grid_remove()
+            self.label_freq_spectrum.grid_remove()
+            self.label_freq_energy.grid_remove()
+            self.label_freq_similarity.grid_remove()
             
             # Hiển thị labels tương ứng với phương pháp
             if phương_pháp == 'minutiae':
-                self.label_ending.grid()
-                self.label_bifurcation.grid()
-                self.label_total.grid()
+                self.label_minutiae_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_ending.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_bifurcation.grid(row=2, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_total.grid(row=3, column=0, sticky=tk.W, pady=3, padx=0)
+                self.label_minutiae_img2_title.grid(row=4, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_ending2.grid(row=5, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_bifurcation2.grid(row=6, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_total2.grid(row=7, column=0, sticky=tk.W, pady=3, padx=0)
                 self.notebook.tab(self.tab_minutiae_index, state='normal')
             elif phương_pháp == 'feature':
-                self.label_feature_count1.grid()
-                self.label_feature_count2.grid()
-                self.label_good_matches.grid()
+                self.label_feature_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_feature_count1.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_feature_img2_title.grid(row=2, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_feature_count2.grid(row=3, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_good_matches.grid(row=4, column=0, sticky=tk.W, pady=3, padx=0)
                 self.notebook.tab(self.tab_minutiae_index, state='disabled')
             elif phương_pháp == 'lbp':
-                self.label_lbp_distance.grid()
+                self.label_lbp_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_lbp_histogram1.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_lbp_img2_title.grid(row=2, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_lbp_histogram2.grid(row=3, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_lbp_distance.grid(row=4, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_lbp_similarity.grid(row=5, column=0, sticky=tk.W, pady=3, padx=0)
                 self.notebook.tab(self.tab_minutiae_index, state='disabled')
             elif phương_pháp == 'ridge':
-                self.label_ridge_diff.grid()
-                self.label_ridge_cons1.grid()
-                self.label_ridge_cons2.grid()
+                self.label_ridge_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_ridge_orientation1.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_ridge_img2_title.grid(row=2, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_ridge_orientation2.grid(row=3, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_ridge_diff.grid(row=4, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_ridge_consistency.grid(row=5, column=0, sticky=tk.W, pady=3, padx=0)
                 self.notebook.tab(self.tab_minutiae_index, state='disabled')
             elif phương_pháp == 'frequency':
-                self.label_freq_sim.grid()
-                self.label_energy_sim.grid()
-                self.label_ridge_sim.grid()
+                self.label_freq_img1_title.grid(row=0, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_freq_fft1.grid(row=1, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_freq_img2_title.grid(row=2, column=0, sticky=tk.W, pady=(5, 2), padx=0)
+                self.label_freq_fft2.grid(row=3, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_freq_spectrum.grid(row=4, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_freq_energy.grid(row=5, column=0, sticky=tk.W, pady=2, padx=0)
+                self.label_freq_similarity.grid(row=6, column=0, sticky=tk.W, pady=3, padx=0)
                 self.notebook.tab(self.tab_minutiae_index, state='disabled')
         except Exception as e:
             pass
@@ -387,7 +523,7 @@ class HienThiKetQua:
         if self.text_thong_bao.get("1.0", tk.END).strip():
             self.text_thong_bao.insert(tk.END, "\n")
         
-        self.text_thong_bao.insert(tk.END, f"✓ {tin_nhan}")
+        self.text_thong_bao.insert(tk.END, tin_nhan)
         
         # Scroll tới cuối
         self.text_thong_bao.see(tk.END)

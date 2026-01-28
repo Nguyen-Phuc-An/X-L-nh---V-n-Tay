@@ -23,27 +23,27 @@ def reset_database():
         cursor = conn.cursor()
         
         # Drop database nếu tồn tại
-        print("🗑️ Xóa database cũ (nếu tồn tại)...")
+        print("Xóa database cũ (nếu tồn tại)...")
         try:
             cursor.execute("DROP DATABASE IF EXISTS xla_vantay")
-            print("✅ Database cũ đã được xóa")
+            print("Database cũ đã được xóa")
         except Exception as e:
-            print(f"⚠️ Lỗi xóa database: {e}")
+            print(f"Lỗi xóa database: {e}")
         
         # Đọc schema từ file
         schema_file = 'database/schema.sql'
         if not os.path.exists(schema_file):
-            print(f"❌ Không tìm thấy {schema_file}")
+            print(f"Không tìm thấy {schema_file}")
             return False
         
-        print("📖 Đọc schema từ file...")
+        print("Đọc schema từ file...")
         with open(schema_file, 'r', encoding='utf-8') as f:
             schema_sql = f.read()
         
         # Tách các câu lệnh SQL
         statements = schema_sql.split(';')
         
-        print("🔨 Tạo database mới...")
+        print("Tạo database mới...")
         count = 0
         for i, statement in enumerate(statements):
             statement = statement.strip()
@@ -52,20 +52,20 @@ def reset_database():
                     cursor.execute(statement)
                     count += 1
                     if i % 5 == 0:
-                        print(f"  ✓ Thực hiện {count} câu lệnh...")
+                        print(f"  Thực hiện {count} câu lệnh...")
                 except Exception as e:
-                    print(f"⚠️ Lỗi câu lệnh {i}: {e}")
+                    print(f"Lỗi câu lệnh {i}: {e}")
         
-        print("✅ Database đã được reset thành công!")
-        print("✅ Bây giờ bạn có thể đăng ký người dùng mới với tất cả features")
+        print("Database đã được reset thành công!")
+        print("Bây giờ bạn có thể đăng ký người dùng mới với tất cả features")
         
         return True
         
     except mysql.connector.Error as err:
-        print(f"❌ Lỗi MySQL: {err}")
+        print(f"Lỗi MySQL: {err}")
         return False
     except Exception as e:
-        print(f"❌ Lỗi: {e}")
+        print(f"Lỗi: {e}")
         import traceback
         traceback.print_exc()
         return False

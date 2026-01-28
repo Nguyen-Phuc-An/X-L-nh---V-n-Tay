@@ -63,7 +63,7 @@ class GiaoDienDangKy:
         paned_window.add(info_frame, weight=1)
         
         # Label cho phần thông tin
-        ttk.Label(info_frame, text="📋 THÔNG TIN NGƯỜI DÙNG", 
+        ttk.Label(info_frame, text="THÔNG TIN NGƯỜI DÙNG", 
                  font=('Arial', 10, 'bold')).pack(pady=15)
         
         # Scrollable frame cho form
@@ -135,7 +135,7 @@ class GiaoDienDangKy:
         image_frame = ttk.Frame(paned_window)
         paned_window.add(image_frame, weight=1)
         
-        ttk.Label(image_frame, text="🖐️ HÌNH ẢNH XEM TRƯỚC", 
+        ttk.Label(image_frame, text="HÌNH ẢNH XEM TRƯỚC", 
                  font=('Arial', 10, 'bold')).pack(pady=10)
         
         # Canvas hiển thị ảnh
@@ -146,17 +146,17 @@ class GiaoDienDangKy:
         action_frame = ttk.Frame(paned_window)
         paned_window.add(action_frame, weight=1)
         
-        ttk.Label(action_frame, text="⚙️ TÙYỂN ĐỘC & THAO TÁC", 
+        ttk.Label(action_frame, text="TÙYỂN ĐỘC & THAO TÁC", 
                  font=('Arial', 10, 'bold')).pack(pady=10)
         
         # Upload button frame
         button_top_frame = ttk.Frame(action_frame)
         button_top_frame.pack(fill=tk.X, padx=5, pady=5)
         
-        ttk.Button(button_top_frame, text="📁 Chọn Ảnh", 
+        ttk.Button(button_top_frame, text="Chọn Ảnh", 
                   command=self._chon_anh).pack(side=tk.LEFT, padx=3, fill=tk.X, expand=True)
         
-        ttk.Button(button_top_frame, text="🔄 Xóa Ảnh", 
+        ttk.Button(button_top_frame, text="Xóa Ảnh", 
                   command=self._xoa_anh).pack(side=tk.LEFT, padx=3, fill=tk.X, expand=True)
         
         # Finger name
@@ -191,7 +191,7 @@ class GiaoDienDangKy:
         ttk.Button(button_bottom_frame, text="✅ Đăng Ký",
                   command=self._dang_ky).pack(side=tk.LEFT, padx=3, fill=tk.X, expand=True)
         
-        ttk.Button(button_bottom_frame, text="🔄 Làm Mới",
+        ttk.Button(button_bottom_frame, text="Làm Mới",
                   command=self._lam_moi).pack(side=tk.LEFT, padx=3, fill=tk.X, expand=True)
     
     def _chon_anh(self):
@@ -244,11 +244,11 @@ class GiaoDienDangKy:
                                           image=anh_tk)
             self.canvas_image.image = anh_tk
             
-            self._cap_nhat_trang_thai(f"✓ Đã chọn ảnh: {os.path.basename(duong_dan)}")
+            self._cap_nhat_trang_thai(f"Đã chọn ảnh: {os.path.basename(duong_dan)}")
         
         except Exception as e:
             messagebox.showerror("Lỗi", f"Lỗi chọn ảnh: {str(e)}")
-            self._cap_nhat_trang_thai(f"✗ Lỗi: {str(e)}")
+            self._cap_nhat_trang_thai(f"Lỗi: {str(e)}")
     
     def _xoa_anh(self):
         """Xóa ảnh đã chọn"""
@@ -264,7 +264,7 @@ class GiaoDienDangKy:
         self.frequency_data = None
         
         self.canvas_image.delete("all")
-        self._cap_nhat_trang_thai("✓ Ảnh đã được xóa")
+        self._cap_nhat_trang_thai("Ảnh đã được xóa")
     
     def _xu_ly_anh(self):
         """Xử lý ảnh tự động"""
@@ -272,32 +272,32 @@ class GiaoDienDangKy:
             return False
         
         try:
-            self._cap_nhat_trang_thai("⏳ Đang xử lý ảnh...")
+            self._cap_nhat_trang_thai("Đang xử lý ảnh...")
             
             # Chuẩn hóa
-            self._cap_nhat_trang_thai("⏳ Đang chuẩn hóa...")
+            self._cap_nhat_trang_thai("Đang chuẩn hóa...")
             anh_chuan_hoa = chuan_hoa_anh(self.anh_xam)
             
             # Tăng cường
-            self._cap_nhat_trang_thai("⏳ Đang tăng cường...")
+            self._cap_nhat_trang_thai("Đang tăng cường...")
             anh_tang_cuong = ap_dung_gabor_filter(anh_chuan_hoa)
             
             # Nhị phân hóa
-            self._cap_nhat_trang_thai("⏳ Đang nhị phân hóa...")
+            self._cap_nhat_trang_thai("Đang nhị phân hóa...")
             anh_nhi_phan, _ = nhi_phan_hoa_otsu(anh_tang_cuong)
             
             # Lưu ảnh nhị phân
             self.anh_nhi_phan = anh_nhi_phan
             
             # Làm mảnh
-            self._cap_nhat_trang_thai("⏳ Đang làm mảnh ảnh...")
+            self._cap_nhat_trang_thai("Đang làm mảnh ảnh...")
             self.anh_manh = lam_manh_scikit_image(anh_nhi_phan)
             
             # Lưu ảnh tiền xử lý (cho Feature/LBP/Ridge/Frequency)
             self.anh_xu_ly = anh_nhi_phan  # Ảnh nhị phân trước thinning
             
             # Trích tất cả đặc trưng từ ảnh tiền xử lý (anh_nhi_phan)
-            self._cap_nhat_trang_thai("⏳ Đang trích tất cả đặc trưng...")
+            self._cap_nhat_trang_thai("Đang trích tất cả đặc trưng...")
             
             # Minutiae (từ ảnh làm mảnh)
             self.minutiae = trich_minutiae_chi_tiet(self.anh_manh)
@@ -363,17 +363,17 @@ class GiaoDienDangKy:
             minutiae_count = len(self.minutiae.get('endings', [])) + len(self.minutiae.get('bifurcations', [])) if self.minutiae else 0
             
             self._cap_nhat_trang_thai(
-                f"✓ Xử lý hoàn tất!\n"
+                f"Xử lý hoàn tất!\n"
                 f"  - Minutiae: {minutiae_count}\n"
-                f"  - Feature: {'✓' if self.feature_data else '✗'}\n"
-                f"  - LBP: {'✓' if self.lbp_data else '✗'}\n"
-                f"  - Ridge: {'✓' if self.ridge_data else '✗'}\n"
-                f"  - Frequency: {'✓' if self.frequency_data else '✗'}"
+                f"  - Feature: {'Đã trích' if self.feature_data else 'Không'}\n"
+                f"  - LBP: {'Đã trích' if self.lbp_data else 'Không'}\n"
+                f"  - Ridge: {'Đã trích' if self.ridge_data else 'Không'}\n"
+                f"  - Frequency: {'Đã trích' if self.frequency_data else 'Không'}"
             )
             return True
         
         except Exception as e:
-            self._cap_nhat_trang_thai(f"✗ Lỗi xử lý: {str(e)}")
+            self._cap_nhat_trang_thai(f"Lỗi xử lý: {str(e)}")
             messagebox.showerror("Lỗi", f"Lỗi xử lý ảnh: {str(e)}")
             return False
     
@@ -402,7 +402,7 @@ class GiaoDienDangKy:
                 return
             
             # Thêm người dùng
-            self._cap_nhat_trang_thai("⏳ Đang lưu người dùng...")
+            self._cap_nhat_trang_thai("Đang lưu người dùng...")
             user_id = self.db_handler.them_nguoi_dung_moi(
                 username=self.var_username.get(),
                 full_name=self.var_fullname.get(),
@@ -421,7 +421,7 @@ class GiaoDienDangKy:
                 return
             
             # Lưu vân tay (lưu ảnh nhị phân)
-            self._cap_nhat_trang_thai("⏳ Đang lưu vân tay...")
+            self._cap_nhat_trang_thai("Đang lưu vân tay...")
             fingerprint_id = self.db_handler.luu_van_tay(
                 user_id=user_id,
                 finger_name=self.var_finger.get(),
@@ -435,7 +435,7 @@ class GiaoDienDangKy:
                 return
             
             self._cap_nhat_trang_thai(
-                f"✓ Đăng ký thành công!\n"
+                f"Đăng ký thành công!\n"
                 f"  - User ID: {user_id}\n"
                 f"  - Fingerprint ID: {fingerprint_id}"
             )
@@ -449,7 +449,7 @@ class GiaoDienDangKy:
         
         except Exception as e:
             messagebox.showerror("Lỗi", f"Lỗi đăng ký: {str(e)}")
-            self._cap_nhat_trang_thai(f"✗ Lỗi: {str(e)}")
+            self._cap_nhat_trang_thai(f"Lỗi: {str(e)}")
     
     def _lam_moi(self):
         """Làm mới form"""
@@ -464,7 +464,7 @@ class GiaoDienDangKy:
         self.var_hand.set("Right")
         
         self._xoa_anh()
-        self._cap_nhat_trang_thai("✓ Form đã được làm mới")
+        self._cap_nhat_trang_thai("Form đã được làm mới")
     
     def _cap_nhat_trang_thai(self, message):
         """Cập nhật trạng thái"""

@@ -365,10 +365,10 @@ class XuLySuKien:
             duong_dan_temp = self.duong_dan_anh_2
         
         try:
-            self.gui.hien_thi_ket_qua.cap_nhat_thong_bao("⏳ Đang trích tất cả các loại đặc trưng...")
+            self.gui.hien_thi_ket_qua.cap_nhat_thong_bao("Đang trích tất cả các loại đặc trưng...")
             self.gui.root.update()
             
-            thông_báo = "✓ Trích đặc trưng ảnh " + str(self.anh_hien_tai) + ":\n\n"
+            thông_báo = "Trích đặc trưng ảnh " + str(self.anh_hien_tai) + ":\n\n"
             
             # 1. Trích Minutiae
             try:
@@ -402,7 +402,7 @@ class XuLySuKien:
                 thông_báo += f"🔎 Minutiae: {num_endings} ending + {num_bifurcations} bifurcation = {total_minutiae}\n"
             except Exception as e:
                 import traceback
-                thông_báo += f"❌ Minutiae: Lỗi - {str(e)}\n"
+                thông_báo += f"Minutiae: Lỗi - {str(e)}\n"
                 print(f"Lỗi trích Minutiae: {e}")
                 traceback.print_exc()
             
@@ -411,17 +411,17 @@ class XuLySuKien:
                 from skimage.feature import local_binary_pattern
                 if anh_xu_ly_temp is not None:
                     lbp = local_binary_pattern(anh_xu_ly_temp, 8, 1, method='uniform')
-                    thông_báo += f"📊 LBP Texture: Đã trích (size: {lbp.shape})\n"
+                    thông_báo += f"LBP Texture: Đã trích (size: {lbp.shape})\n"
             except Exception as e:
-                thông_báo += f"❌ LBP: Lỗi - {str(e)}\n"
+                thông_báo += f"LBP: Lỗi - {str(e)}\n"
                 print(f"Lỗi trích LBP: {e}")
             
             # 3. Trích Ridge Orientation
             try:
                 # Ridge orientation được tính từ ảnh nhị phân
-                thông_báo += f"〰️ Ridge Orientation: Đã trích\n"
+                thông_báo += f"Ridge Orientation: Đã trích\n"
             except Exception as e:
-                thông_báo += f"❌ Ridge: Lỗi - {str(e)}\n"
+                thông_báo += f"Ridge: Lỗi - {str(e)}\n"
                 print(f"Lỗi trích Ridge: {e}")
             
             # 4. Trích Frequency Domain
@@ -429,12 +429,12 @@ class XuLySuKien:
                 from scipy.fftpack import fft2, fftshift
                 if anh_xu_ly_temp is not None:
                     freq = np.abs(fftshift(fft2(anh_xu_ly_temp)))
-                    thông_báo += f"📈 Frequency Domain: Đã trích (size: {freq.shape})\n"
+                    thông_báo += f"Frequency Domain: Đã trích (size: {freq.shape})\n"
             except Exception as e:
-                thông_báo += f"❌ Frequency: Lỗi - {str(e)}\n"
+                thông_báo += f"Frequency: Lỗi - {str(e)}\n"
                 print(f"Lỗi trích Frequency: {e}")
             
-            thông_báo += f"\n✅ Hoàn tất trích tất cả đặc trưng cho ảnh {self.anh_hien_tai}"
+            thông_báo += f"\nHoàn tất trích tất cả đặc trưng cho ảnh {self.anh_hien_tai}"
             
             self.gui.hien_thi_ket_qua.cap_nhat_thong_bao(thông_báo)
             
@@ -512,7 +512,7 @@ class XuLySuKien:
             phương_pháp_list = ['minutiae', 'feature', 'lbp', 'ridge', 'frequency']
             kết_quả_all = {}
             
-            self.gui.hien_thi_ket_qua.cap_nhat_thong_bao("⏳ Đang so khớp tất cả các phương pháp...")
+            self.gui.hien_thi_ket_qua.cap_nhat_thong_bao("Đang so khớp tất cả các phương pháp...")
             self.gui.root.update()
             
             # So khớp từng phương pháp
@@ -564,12 +564,12 @@ class XuLySuKien:
             kết_quả_sắp_xếp = sorted(kết_quả_all.items(), key=lambda x: x[1], reverse=True)
             
             # Tạo thông báo chi tiết
-            thông_báo = "📊 KẾT QUẢ SO KHỚP TẤT CẢ PHƯƠNG PHÁP:\n\n"
+            thông_báo = "KẾT QUẢ SO KHỚP TẤT CẢ PHƯƠNG PHÁP:\n\n"
             for i, (phương_pháp, điểm) in enumerate(kết_quả_sắp_xếp, 1):
                 thông_báo += f"{i}. {tên_phương_pháp[phương_pháp]}: {điểm:.2f}%\n"
             
             điểm_cao_nhất = kết_quả_sắp_xếp[0][1]
-            thông_báo += f"\n🏆 Phương pháp tốt nhất: {tên_phương_pháp[kết_quả_sắp_xếp[0][0]]} ({điểm_cao_nhất:.2f}%)"
+            thông_báo += f"\nPhương pháp tốt nhất: {tên_phương_pháp[kết_quả_sắp_xếp[0][0]]} ({điểm_cao_nhất:.2f}%)"
             
             self.gui.hien_thi_ket_qua.cap_nhat_thong_bao(thông_báo)
             
@@ -608,7 +608,8 @@ class XuLySuKien:
                 total_2 = num_endings_2 + num_bifurcations_2
                 
                 self.gui.hien_thi_ket_qua.cap_nhat_chi_tiet_minutiae(
-                    num_endings_1, num_bifurcations_1, total_1
+                    num_endings_1, num_bifurcations_1, total_1,
+                    num_endings_2, num_bifurcations_2, total_2
                 )
             except Exception as e:
                 print(f"Lỗi cập nhật chi tiết minutiae: {e}")
@@ -643,7 +644,6 @@ class XuLySuKien:
         
         try:
             # Sử dụng ảnh tiền xử lý để trích features tốt hơn
-            result = so_khop_feature_matching(self.anh_xu_ly, self.anh_xu_ly_2)
             result = so_khop_feature_matching(self.anh_xu_ly, self.anh_xu_ly_2)
             similarity_score = result['similarity_score']
             
@@ -682,6 +682,16 @@ class XuLySuKien:
             return
         
         try:
+            # Trích LBP features từ cả hai ảnh
+            from trich_dac_trung.trich_dac_trung_chi_tiet import trich_lbp_features
+            import cv2
+            
+            anh1_gray = cv2.cvtColor(self.anh_xu_ly, cv2.COLOR_BGR2GRAY) if len(self.anh_xu_ly.shape) == 3 else self.anh_xu_ly
+            anh2_gray = cv2.cvtColor(self.anh_xu_ly_2, cv2.COLOR_BGR2GRAY) if len(self.anh_xu_ly_2.shape) == 3 else self.anh_xu_ly_2
+            
+            features1 = trich_lbp_features(anh1_gray)
+            features2 = trich_lbp_features(anh2_gray)
+            
             # Sử dụng ảnh tiền xử lý để trích LBP texture tốt hơn
             result = so_khop_lbp_texture(self.anh_xu_ly, self.anh_xu_ly_2)
             similarity_score = result.get('similarity_score', 0)
@@ -690,8 +700,10 @@ class XuLySuKien:
             
             # Cập nhật thông tin chi tiết
             chi_square_distance = result.get('chi_square_distance', 0)
-            
-            self.gui.hien_thi_ket_qua.cap_nhat_chi_tiet_lbp(chi_square_distance)
+            # Lấy histogram size từ features
+            histogram_size1 = len(features1.get('lbp_histogram', [])) if 'lbp_histogram' in features1 else 0
+            histogram_size2 = len(features2.get('lbp_histogram', [])) if 'lbp_histogram' in features2 else 0
+            self.gui.hien_thi_ket_qua.cap_nhat_chi_tiet_lbp(chi_square_distance, histogram_size1, histogram_size2)
             
             self.gui.hien_thi_ket_qua.cap_nhat_ket_qua_so_khop(0, similarity_score)
             self.gui.hien_thi_ket_qua.cap_nhat_thong_bao(
@@ -708,6 +720,17 @@ class XuLySuKien:
             return
         
         try:
+            # Trích Ridge features từ cả hai ảnh
+            from trich_dac_trung.trich_dac_trung_chi_tiet import trich_ridge_orientation_field
+            import cv2
+            import numpy as np
+            
+            anh1_gray = cv2.cvtColor(self.anh_xu_ly, cv2.COLOR_BGR2GRAY) if len(self.anh_xu_ly.shape) == 3 else self.anh_xu_ly
+            anh2_gray = cv2.cvtColor(self.anh_xu_ly_2, cv2.COLOR_BGR2GRAY) if len(self.anh_xu_ly_2.shape) == 3 else self.anh_xu_ly_2
+            
+            features1 = trich_ridge_orientation_field(anh1_gray)
+            features2 = trich_ridge_orientation_field(anh2_gray)
+            
             # Sử dụng ảnh tiền xử lý để tính ridge orientation tốt hơn
             result = so_khop_ridge_orientation(self.anh_xu_ly, self.anh_xu_ly_2)
             similarity_score = result.get('similarity_score', 0)
@@ -716,19 +739,17 @@ class XuLySuKien:
             
             # Cập nhật thông tin chi tiết
             mean_diff = result.get('mean_orientation_diff', 0)
-            consistency_1 = result.get('consistency_1', 0)
-            consistency_2 = result.get('consistency_2', 0)
-            
-            self.gui.hien_thi_ket_qua.cap_nhat_chi_tiet_ridge(
-                mean_diff, consistency_1, consistency_2
-            )
+            # Tính trung bình góc từ orientation fields
+            field1 = np.array(features1.get('orientation_field', []))
+            field2 = np.array(features2.get('orientation_field', []))
+            avg_angle1 = float(np.mean(field1)) if field1.size > 0 else 0
+            avg_angle2 = float(np.mean(field2)) if field2.size > 0 else 0
+            self.gui.hien_thi_ket_qua.cap_nhat_chi_tiet_ridge(mean_diff, avg_angle1, avg_angle2)
             
             self.gui.hien_thi_ket_qua.cap_nhat_ket_qua_so_khop(0, similarity_score)
             self.gui.hien_thi_ket_qua.cap_nhat_thong_bao(
                 f"So khớp Ridge Orientation hoàn tất! Điểm: {similarity_score:.2f}\n"
-                f"Mean angle diff: {mean_diff:.2f}°\n"
-                f"Consistency 1: {consistency_1:.4f}\n"
-                f"Consistency 2: {consistency_2:.4f}"
+                f"Chênh lệch góc: {mean_diff:.2f}°"
             )
         except Exception as e:
             messagebox.showerror("Lỗi", f"Lỗi so khớp Ridge: {str(e)}")
@@ -740,6 +761,16 @@ class XuLySuKien:
             return
         
         try:
+            # Trích Frequency features từ cả hai ảnh
+            from trich_dac_trung.trich_dac_trung_chi_tiet import trich_frequency_domain_features
+            import cv2
+            
+            anh1_gray = cv2.cvtColor(self.anh_xu_ly, cv2.COLOR_BGR2GRAY) if len(self.anh_xu_ly.shape) == 3 else self.anh_xu_ly
+            anh2_gray = cv2.cvtColor(self.anh_xu_ly_2, cv2.COLOR_BGR2GRAY) if len(self.anh_xu_ly_2.shape) == 3 else self.anh_xu_ly_2
+            
+            features1 = trich_frequency_domain_features(anh1_gray)
+            features2 = trich_frequency_domain_features(anh2_gray)
+            
             # Sử dụng ảnh tiền xử lý để phân tích frequency domain tốt hơn
             result = so_khop_frequency_domain(self.anh_xu_ly, self.anh_xu_ly_2)
             similarity_score = result.get('similarity_score', 0)
@@ -749,18 +780,18 @@ class XuLySuKien:
             # Cập nhật thông tin chi tiết
             freq_sim = result.get('frequency_similarity', 0)
             energy_sim = result.get('energy_similarity', 0)
-            ridge_sim = result.get('ridge_similarity', 0)
-            
+            # Lấy FFT frequency info từ features
+            fft_info1 = f"{features1.get('dominant_frequency', 0):.1f} Hz" if 'dominant_frequency' in features1 else "-"
+            fft_info2 = f"{features2.get('dominant_frequency', 0):.1f} Hz" if 'dominant_frequency' in features2 else "-"
             self.gui.hien_thi_ket_qua.cap_nhat_chi_tiet_frequency(
-                freq_sim, energy_sim, ridge_sim
+                freq_sim, energy_sim, similarity_score, fft_info1, fft_info2
             )
             
             self.gui.hien_thi_ket_qua.cap_nhat_ket_qua_so_khop(0, similarity_score)
             self.gui.hien_thi_ket_qua.cap_nhat_thong_bao(
                 f"So khớp Frequency Domain hoàn tất! Điểm: {similarity_score:.2f}\n"
-                f"Freq similarity: {freq_sim:.2f}\n"
-                f"Energy similarity: {energy_sim:.2f}\n"
-                f"Ridge similarity: {ridge_sim:.2f}"
+                f"Phổ tần: {freq_sim:.2f}%\n"
+                f"Năng lượng: {energy_sim:.2f}%"
             )
         except Exception as e:
             messagebox.showerror("Lỗi", f"Lỗi so khớp Frequency: {str(e)}")
